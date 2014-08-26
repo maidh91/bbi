@@ -1,0 +1,6 @@
+<GUI.*>:package(lablgtk2)
+<refiner.*>:package(num)
+true:package(core,sexplib,sexplib.syntax,ocamlgraph)
+true:syntax(camlp4o)
+true:thread
+<**/*.cma>: ocaml, byte, library

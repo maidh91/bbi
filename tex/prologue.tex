@@ -1,0 +1,157 @@
+% Prologue starts
+\documentclass[10pt,leqno]{article}
+\usepackage{proof}
+\usepackage{fullpage}
+\usepackage[small,bf]{caption}
+\usepackage[a0paper,landscape]{geometry}
+
+%% Symbols
+\newcommand{\Stop}{\top}
+\newcommand{\Sbot}{\bot}
+\newcommand{\Sneg}{\neg}
+\newcommand{\Sand}{\wedge}
+\newcommand{\Sor}{\vee}
+\newcommand{\Simply}{\rightarrow}
+\newcommand{\Sunit}{\mathsf{I}}
+\newcommand{\Sstar}{\star}
+\newcommand{\Swand}{-\!\!\star}
+% For Propositional Logic
+\newcommand{\Ttop}{\Stop}
+\newcommand{\Tbot}{\Sbot}
+\newcommand{\Tneg}[1]{\Sneg{#1}}
+\newcommand{\Tand}[2]{{{#1}\Sand{#2}}}
+\newcommand{\Tor}[2]{{{#1}\Sor{#2}}}
+\newcommand{\Timply}[2]{{{#1}\Simply{#2}}}
+% for BI Logic
+\newcommand{\Tunit}{\Sunit}
+\newcommand{\Tstar}[2]{{{#1}\Sstar{#2}}}
+\newcommand{\Twand}[2]{{{#1}\Swand\,{#2}}}
+% for node state
+\newcommand{\multzero}{{\emptyset_{\mathsf{m}}}}
+
+\setlength{\fboxsep}{1pt} 
+\newcommand{\fcbox}[1]{\fbox{{#1}}}
+
+%% Sequent for SBBI/CSBBI
+\newcommand{\Wup}[2]{{#1}\langle{#2}\rangle}
+\newcommand{\Wdown}[2]{{#1}, {#2}}
+\newcommand{\Jbbseqw}[3]{{#1} \Longrightarrow_{{#3}} {#2}}
+
+%% Sequent for LBBI
+\newcommand{\Btrue}[2]{{#2} @ {#1}}
+\newcommand{\Bequiv}[2]{{#1} \sim {#2}}
+\newcommand{\Wmul}[2]{{#1} \cdot {#2}}
+\newcommand{\Jbblseq}[3]{{#1} \vdash {#2} \Longrightarrow {#3}}
+
+%%
+\newcommand{\SymL}{\textit{L}}
+\newcommand{\SymR}{\textit{R}}
+\newcommand{\SymW}{\textit{W}}
+\newcommand{\SymC}{\textit{C}}
+
+%% Rules for SBBI
+\newcommand{\BRule}[1]{{#1}_{\mathcal{B}}}
+\newcommand{\RSBinit}{{ \mathit{Init}_{\mathcal{B}} }}
+\newcommand{\RSBweakeningleft}{\BRule{ \textit{WL} }}
+\newcommand{\RSBweakeningright}{\BRule{ \textit{WR} }}
+\newcommand{\RSBcontractionleft}{\BRule{ \textit{CL} }}
+\newcommand{\RSBcontractionright}{\BRule{ \textit{CR} }}
+\newcommand{\RSBequiv}{\BRule{E}}
+\newcommand{\RSBtopleft}{\BRule{{\Stop}{\SymL}}}
+\newcommand{\RSBtopright}{\BRule{{\Stop}{\SymR}}}
+\newcommand{\RSBbotleft}{\BRule{{\Sbot}{\SymL}}}
+\newcommand{\RSBbotright}{\BRule{{\Sbot}{\SymR}}}
+\newcommand{\RSBnegleft}{\BRule{{\Sneg}{\SymL}}}
+\newcommand{\RSBnegright}{\BRule{{\Sneg}{\SymR}}}
+\newcommand{\RSBandleft}{\BRule{{\Sand}{\SymL}}}
+\newcommand{\RSBandright}{\BRule{{\Sand}{\SymR}}}
+\newcommand{\RSBorleft}{\BRule{{\Sor}{\SymL}}}
+\newcommand{\RSBorright}{\BRule{{\Sor}{\SymR}}}
+\newcommand{\RSBimplyleft}{\BRule{{\Simply}{\SymL}}}
+\newcommand{\RSBimplyright}{\BRule{{\Simply}{\SymR}}}
+\newcommand{\RSBunitleft}{\BRule{{\Sunit}{\SymL}}}
+\newcommand{\RSBunitright}{\BRule{{\Sunit}{\SymR}}}
+\newcommand{\RSBstarleft}{\BRule{{\Sstar}{\SymL}}}
+\newcommand{\RSBstarright}{\BRule{{\Sstar}{\SymR}}}
+\newcommand{\RSBwandleft}{\BRule{{\Swand}{\SymL}}}
+\newcommand{\RSBwandright}{\BRule{{\Swand}{\SymR}}}
+\newcommand{\RSBswitch}{\BRule{\Leftrightarrow}}
+\newcommand{\RSBmultzeroup}{{\multzero\!\mathit{U}_{\mathcal{B}}}}
+\newcommand{\RSBmultzerodown}{{\multzero\!\mathit{D}_{\mathcal{B}}}}
+\newcommand{\RSBup}{\BRule{\textit{TP}}}
+\newcommand{\RSBdown}{\BRule{\textit{TC}}} 
+\newcommand{\RSBsibiling}{\BRule{\textit{TS}}} 
+\newcommand{\RSBcomm}{\BRule{\textit{EC}}}
+\newcommand{\RSBassoc}{\BRule{\textit{EA}}}
+
+%% Rules for CSBBI
+\newcommand{\CRule}[1]{{#1}_{\mathcal{C}}}
+\newcommand{\RCSBinit}{{ \mathit{Init}_{\mathcal{C}} }}
+\newcommand{\RCSBweakeningleft}{\CRule{ \textit{WL} }}
+\newcommand{\RCSBweakeningright}{\CRule{ \textit{WR} }}
+\newcommand{\RCSBcontractionleft}{\CRule{ \textit{CL} }}
+\newcommand{\RCSBcontractionright}{\CRule{ \textit{CR} }}
+\newcommand{\RCSBequiv}{\CRule{E}}
+\newcommand{\RCSBtopleft}{\CRule{{\Stop}{\SymL}}}
+\newcommand{\RCSBtopright}{\CRule{{\Stop}{\SymR}}}
+\newcommand{\RCSBbotleft}{\CRule{{\Sbot}{\SymL}}}
+\newcommand{\RCSBbotright}{\CRule{{\Sbot}{\SymR}}}
+\newcommand{\RCSBnegleft}{\CRule{{\Sneg}{\SymL}}}
+\newcommand{\RCSBnegright}{\CRule{{\Sneg}{\SymR}}}
+\newcommand{\RCSBandleft}{\CRule{{\Sand}{\SymL}}}
+\newcommand{\RCSBandright}{\CRule{{\Sand}{\SymR}}}
+\newcommand{\RCSBorleft}{\CRule{{\Sor}{\SymL}}}
+\newcommand{\RCSBorright}{\CRule{{\Sor}{\SymR}}}
+\newcommand{\RCSBimplyleft}{\CRule{{\Simply}{\SymL}}}
+\newcommand{\RCSBimplyright}{\CRule{{\Simply}{\SymR}}}
+\newcommand{\RCSBunitleft}{\CRule{{\Sunit}{\SymL}}}
+\newcommand{\RCSBunitright}{\CRule{{\Sunit}{\SymR}}}
+\newcommand{\RCSBstarleft}{\CRule{{\Sstar}{\SymL}}}
+\newcommand{\RCSBstarright}{\CRule{{\Sstar}{\SymR}}}
+\newcommand{\RCSBwandleft}{\CRule{{\Swand}{\SymL}}}
+\newcommand{\RCSBwandright}{\CRule{{\Swand}{\SymR}}}
+\newcommand{\RCSBswitch}{\CRule{\Leftrightarrow}}
+\newcommand{\RCSBmultzeroup}{{\multzero\!\mathit{U}_{\mathcal{C}}}}
+\newcommand{\RCSBmultzerodown}{{\multzero\!\mathit{D}_{\mathcal{C}}}}
+\newcommand{\RCSBup}{\CRule{\textit{TP}}}
+\newcommand{\RCSBdown}{\CRule{\textit{TC}}} 
+\newcommand{\RCSBsibiling}{\CRule{\textit{TS}}} 
+\newcommand{\RCSBcomm}{\CRule{\textit{EC}}}
+\newcommand{\RCSBassoc}{\CRule{\textit{EA}}}
+
+%% Rules for LBBI
+\newcommand{\LRule}[1]{{#1}_{\mathcal{L}}}
+\newcommand{\RLBinit}{{ \mathit{Init}_{\mathcal{L}} }}
+\newcommand{\RLBweakeningleft}{\LRule{ \textit{WL} }}
+\newcommand{\RLBweakeningright}{\LRule{ \textit{WR} }}
+\newcommand{\RLBcontractionleft}{\LRule{ \textit{CL} }}
+\newcommand{\RLBcontractionright}{\LRule{ \textit{CR} }}
+\newcommand{\RLBequiv}{\LRule{E}}
+\newcommand{\RLBtopleft}{\LRule{{\Stop}{\SymL}}}
+\newcommand{\RLBtopright}{\LRule{{\Stop}{\SymR}}}
+\newcommand{\RLBbotleft}{\LRule{{\Sbot}{\SymL}}}
+\newcommand{\RLBbotright}{\LRule{{\Sbot}{\SymR}}}
+\newcommand{\RLBnegleft}{\LRule{{\Sneg}{\SymL}}}
+\newcommand{\RLBnegright}{\LRule{{\Sneg}{\SymR}}}
+\newcommand{\RLBandleft}{\LRule{{\Sand}{\SymL}}}
+\newcommand{\RLBandright}{\LRule{{\Sand}{\SymR}}}
+\newcommand{\RLBorleft}{\LRule{{\Sor}{\SymL}}}
+\newcommand{\RLBorright}{\LRule{{\Sor}{\SymR}}}
+\newcommand{\RLBimplyleft}{\LRule{{\Simply}{\SymL}}}
+\newcommand{\RLBimplyright}{\LRule{{\Simply}{\SymR}}}
+\newcommand{\RLBunitleft}{\LRule{{\Sunit}{\SymL}}}
+\newcommand{\RLBunitright}{\LRule{{\Sunit}{\SymR}}}
+\newcommand{\RLBstarleft}{\LRule{{\Sstar}{\SymL}}}
+\newcommand{\RLBstarright}{\LRule{{\Sstar}{\SymR}}}
+\newcommand{\RLBwandleft}{\LRule{{\Swand}{\SymL}}}
+\newcommand{\RLBwandright}{\LRule{{\Swand}{\SymR}}}
+\newcommand{\RLBswitch}{\LRule{\Leftrightarrow}}
+\newcommand{\RLBmultzeroup}{{\multzero\!\mathit{U}_{\mathcal{L}}}}
+\newcommand{\RLBmultzerodown}{{\multzero\!\mathit{D}_{\mathcal{L}}}}
+\newcommand{\RLBcomm}{\LRule{\textit{EC}}}
+\newcommand{\RLBassoc}{\LRule{\textit{EA}}}
+
+\pagestyle{empty}
+
+\begin{document}
+% Prologue ends
